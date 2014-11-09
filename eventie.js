@@ -10,8 +10,9 @@
 /*global define: false, module: false */
 
 ( function( window ) {
-
 'use strict';
+
+if (!window) return;
 
 var docElem = document.documentElement;
 
@@ -67,16 +68,15 @@ var eventie = {
 };
 
 // ----- module definition ----- //
-
-if ( typeof define === 'function' && define.amd ) {
-  // AMD
-  define( eventie );
-} else if ( typeof exports === 'object' ) {
+if ( typeof exports === 'object' ) {
   // CommonJS
   module.exports = eventie;
+} else if ( typeof define === 'function' && define.amd ) {
+  // AMD
+  define( eventie );
 } else {
   // browser global
   window.eventie = eventie;
 }
 
-})( this );
+})( typeof window !== 'undefined' ? window : null );
